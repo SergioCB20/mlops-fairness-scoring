@@ -1,0 +1,43 @@
+contract_id: C1
+name: "Contrato de Representatividad e Integridad de Datos"
+version: "1.0"
+applies_to: "zona1_ingesta"
+
+schema:
+  required_columns:
+    - name: label
+      dtype: int
+      nullable: false
+      allowed_values: [0, 1]
+    - name: Age
+      dtype: int
+      nullable: false
+      min_value: 18
+      max_value: 100
+    - name: Sex
+      dtype: int
+      nullable: false
+      allowed_values: [1, 2]
+    - name: Marital
+      dtype: int
+      nullable: false
+    - name: Number_of_credits
+      dtype: int
+      nullable: false
+      min_value: 0
+    - name: Linked_cards
+      dtype: int
+      nullable: false
+      min_value: 0
+
+integrity:
+  max_null_ratio_per_column: 0.05
+  max_duplicate_rows_ratio: 0.01
+
+representativeness:
+  protected_attribute: Sex
+  min_group_proportion: 0.05
+  rules:
+    - metric: min_group_proportion
+      operator: ">="
+      threshold: 0.05

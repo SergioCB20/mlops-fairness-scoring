@@ -1,0 +1,34 @@
+# Entorno virtual
+venv/
+.venv/
+
+# Datos crudos (versionados por DVC, no por Git)
+zona1_ingesta/data/raw/*
+!zona1_ingesta/data/raw/*.dvc
+!zona1_ingesta/data/raw/.gitignore
+
+zona1_ingesta/data/processed/*
+!zona1_ingesta/data/processed/*.dvc
+
+# Modelos y artefactos de MLflow
+zona2_ci_training/models/*
+mlruns/
+
+# Kaggle credentials (nunca subir esto)
+kaggle.json
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# DVC (mantiene su propia carpeta de cache local)
+.dvc/cache
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

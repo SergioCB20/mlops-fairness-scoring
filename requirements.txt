@@ -1,0 +1,12 @@
+pandas
+pandera
+scikit-learn
+pytest
+aif360
+fairlearn
+dvc
+mlflow
+rdflib
+shap
+evidently
+pyyaml
