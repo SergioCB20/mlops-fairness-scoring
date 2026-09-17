@@ -1,0 +1,11 @@
+contract_id: C2
+name: "Contrato de No-Leakage Indirecto de Atributos Protegidos"
+version: "1.0"
+applies_to: "zona1_ingesta/transformers"
+
+conditional_mutual_information:
+  protected_attribute: Sex
+  target_attribute: label
+  max_mi_threshold: 0.10
+  n_neighbors: 3
+  random_state: 42

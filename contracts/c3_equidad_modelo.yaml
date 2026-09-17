@@ -1,0 +1,23 @@
+contract_id: C3
+name: "Contrato de Equidad del Modelo"
+version: "1.0"
+applies_to: "zona2_ci_training"
+
+fairness_metrics:
+  protected_attribute: Sex
+  target_attribute: label
+  favorable_label: 1
+  spd_threshold: 0.10
+  eod_threshold: 0.10
+  di_min: 0.8
+  di_max: 1.25
+
+model:
+  test_size: 0.2
+  random_state: 42
+  class_weight: balanced
+
+mitigation:
+  enabled: true
+  method: threshold_optimizer
+  constraint: equalized_odds
