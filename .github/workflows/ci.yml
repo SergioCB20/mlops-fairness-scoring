@@ -26,8 +26,16 @@ jobs:
           dvc remote modify origin --local user ${{ secrets.DAGSHUB_USER }}
           dvc remote modify origin --local password ${{ secrets.DAGSHUB_TOKEN }}
 
-      - name: Pull dataset from DVC remote
-        run: dvc pull
+            - name: Pull dataset from DVC remote
+              run: |
+                echo "--- Contenido de .dvc/config ---"
+                cat .dvc/config
+                echo "--- Archivos .dvc rastreados ---"
+                find . -name "*.dvc"
+                echo "--- dvc pull en modo verbose ---"
+                dvc pull -v
+                echo "--- Resultado en el directorio de datos ---"
+                ls -la zona1_ingesta/data/raw/
 
       - name: QA Gate 1 - Representatividad e Integridad (C1)
         run: pytest tests/test_qa_gate1.py tests/test_qa_gate1_failure_cases.py -v
