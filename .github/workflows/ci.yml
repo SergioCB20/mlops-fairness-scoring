@@ -16,6 +16,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Configure DVC remote credentials
+        run: |
+              dvc remote modify origin --local auth basic
+              dvc remote modify origin --local user ${{ secrets.DAGSHUB_USER }}
+              dvc remote modify origin --local password ${{ secrets.DAGSHUB_TOKEN }}
+
+      - name: Pull dataset from DVC remote
+        run: dvc pull
 
       - name: Install dependencies
         run: pip install -r requirements.txt
