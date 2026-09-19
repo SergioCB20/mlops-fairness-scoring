@@ -43,6 +43,8 @@ jobs:
                   print('stages:', list(repo.index.stages))
                   print('outs:', list(repo.index.outs))
                   "
+      - name: DVC status verbose (revela errores de parseo ocultos)
+        run: dvc status -v
 
       - name: Pull dataset from DVC remote
         run: |
