@@ -28,12 +28,14 @@ jobs:
 
       - name: Pull dataset from DVC remote
         run: |
-                echo "--- Contenido de .dvc/config ---"
-                cat .dvc/config
-                echo "--- Archivos .dvc rastreados ---"
-                find . -name "*.dvc"
-                echo "--- dvc pull en modo verbose ---"
-                dvc pull -v
+                echo "--- dvc remote list ---"
+                dvc remote list
+                echo "--- dvc fetch (remote -> cache local) ---"
+                dvc fetch -v -r origin
+                echo "--- Contenido del cache tras fetch ---"
+                find .dvc/cache -type f
+                echo "--- dvc checkout (cache -> workspace) ---"
+                dvc checkout -v
                 echo "--- Resultado en el directorio de datos ---"
                 ls -la zona1_ingesta/data/raw/
 
