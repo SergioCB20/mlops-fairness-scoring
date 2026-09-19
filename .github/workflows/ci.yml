@@ -33,6 +33,16 @@ jobs:
       - name: Check if DVC is ignoring the file
         run: |
               dvc check-ignore -d zona1_ingesta/data/raw/credit-scoring.csv.dvc || echo "No está siendo ignorado"
+      - name: Deep inspect DVC repo object
+        run: |
+                  python -c "
+                  from dvc.repo import Repo
+                  repo = Repo()
+                  print('root_dir:', repo.root_dir)
+                  print('dvc_dir:', repo.dvc_dir)
+                  print('stages:', list(repo.index.stages))
+                  print('outs:', list(repo.index.outs))
+                  "
 
       - name: Pull dataset from DVC remote
         run: |
