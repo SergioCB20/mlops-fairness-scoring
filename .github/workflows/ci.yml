@@ -49,6 +49,23 @@ jobs:
       - name: DVC status verbose (revela errores de parseo ocultos)
         run: dvc status -v
 
+      - name: Inspect raw bytes of the .dvc file from git blob
+        run: |
+            git show HEAD:zona1_ingesta/data/raw/credit-scoring.csv.dvc | xxd | head -5
+            echo "--- Intento de parseo YAML directo ---"
+            git show HEAD:zona1_ingesta/data/raw/credit-scoring.csv.dvc > /tmp/test.dvc
+            python -c "
+            import yaml
+            with open('/tmp/test.dvc', 'rb') as f:
+                raw = f.read()
+            print('Primeros bytes:', raw[:10])
+            try:
+                data = yaml.safe_load(raw)
+                print('Parseo exitoso:', data)
+            except Exception as e:
+                print('ERROR DE PARSEO:', e)
+            "
+
       - name: Pull dataset from DVC remote
         run: |
                 echo "--- dvc remote list ---"
