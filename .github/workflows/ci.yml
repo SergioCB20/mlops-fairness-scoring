@@ -30,6 +30,10 @@ jobs:
         run: |
               python -c "from dvc.repo import Repo; repo = Repo(); print('Outs en el índice:', list(repo.index.outs))"
 
+      - name: Check if DVC is ignoring the file
+        run: |
+              dvc check-ignore -d zona1_ingesta/data/raw/credit-scoring.csv.dvc || echo "No está siendo ignorado"
+
       - name: Pull dataset from DVC remote
         run: |
                 echo "--- dvc remote list ---"
