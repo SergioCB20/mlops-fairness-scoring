@@ -26,8 +26,8 @@ jobs:
           dvc remote modify origin --local user ${{ secrets.DAGSHUB_USER }}
           dvc remote modify origin --local password ${{ secrets.DAGSHUB_TOKEN }}
 
-            - name: Pull dataset from DVC remote
-              run: |
+      - name: Pull dataset from DVC remote
+        run: |
                 echo "--- Contenido de .dvc/config ---"
                 cat .dvc/config
                 echo "--- Archivos .dvc rastreados ---"
