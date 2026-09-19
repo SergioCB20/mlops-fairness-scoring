@@ -20,6 +20,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Fix git safe.directory for DVC
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Configure DVC remote credentials
         run: |
           dvc remote modify origin --local auth basic
