@@ -26,6 +26,10 @@ jobs:
           dvc remote modify origin --local user ${{ secrets.DAGSHUB_USER }}
           dvc remote modify origin --local password ${{ secrets.DAGSHUB_TOKEN }}
 
+      - name: Inspect DVC index directly
+        run: |
+              python -c "from dvc.repo import Repo; repo = Repo(); print('Outs en el índice:', list(repo.index.outs))"
+
       - name: Pull dataset from DVC remote
         run: |
                 echo "--- dvc remote list ---"
